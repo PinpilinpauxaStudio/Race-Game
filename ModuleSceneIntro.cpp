@@ -3,6 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
+#include "PhysVehicle3D.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -45,6 +46,11 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	float* carTransform = new float[14];
+	App->player->vehicle->GetTransform(carTransform);
+	vec3 carPos = { carTransform[12], carTransform[13], carTransform[14] };
+	App->camera->LookAt(carPos);
+
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
