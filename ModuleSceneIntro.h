@@ -9,6 +9,17 @@
 struct PhysBody3D;
 struct PhysMotor3D;
 
+class SceneObjectGenerator
+{
+	Application* App;
+public:
+	SceneObjectGenerator(Application* App);
+	void CreateRectangle(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, vec3 scale = { 1,1,1 }, float mass = 0);
+	void RenderObjects();
+private:
+	p2List<Primitive*> ground;
+};
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -44,4 +55,6 @@ public:
 
 
 	PhysBody3D* sensor_cube;
+
+	SceneObjectGenerator sog = SceneObjectGenerator(App);
 };
