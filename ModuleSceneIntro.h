@@ -14,7 +14,7 @@ class SceneObjectGenerator
 	Application* App;
 public:
 	SceneObjectGenerator(Application* App);
-	void CreateRectangle(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, vec3 scale = { 1,1,1 }, float mass = 0);
+	void CreateRectangle(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, vec3 scale = { 1,1,1 }, float mass = 0, bool isSensor = false);
 	void RenderObjects();
 private:
 	p2List<Primitive*> ground;
@@ -52,9 +52,6 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
-
-
-	PhysBody3D* sensor_cube;
 
 	SceneObjectGenerator sog = SceneObjectGenerator(App);
 };

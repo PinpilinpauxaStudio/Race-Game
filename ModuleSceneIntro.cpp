@@ -21,11 +21,12 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 
 	// Create sensor cube (will trigger with car)
-	sensor_cube = App->physics->AddBody(Cube(5, 5, 5), 0.0);
+	/*sensor_cube = App->physics->AddBody(Cube(5, 5, 5), 0.0);
 	sensor_cube->SetAsSensor(true);
-	sensor_cube->SetPos(0, 3, 0);
+	sensor_cube->SetPos(0, 3, 0);*/
 
 	sog.CreateRectangle();
+	sog.CreateRectangle({ 0,3,0 }, { 0,0,0 }, { 5,5,5 }, 0, true);
 
 	return ret;
 }
@@ -59,7 +60,7 @@ SceneObjectGenerator::SceneObjectGenerator(Application* App)
 	this->App = App;
 }
 
-void SceneObjectGenerator::CreateRectangle(vec3 position, vec3 rotation, vec3 scale, float mass)
+void SceneObjectGenerator::CreateRectangle(vec3 position, vec3 rotation, vec3 scale, float mass, bool isSensor)
 {
 	Cube* c = new Cube();
 	c->SetPos(position.x, position.y, position.z);
@@ -67,7 +68,7 @@ void SceneObjectGenerator::CreateRectangle(vec3 position, vec3 rotation, vec3 sc
 	c->SetRotation(rotation.y, { 0,1,0 });
 	c->SetRotation(rotation.z, { 0,0,1 });
 	c->size = scale;
-	ground.add((Primitive*)c);
+	if(!isSensor)ground.add((Primitive*)c);
 	
 	App->physics->AddBody(*c, mass);
 }
