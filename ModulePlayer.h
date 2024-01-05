@@ -15,6 +15,8 @@ public:
 	ModulePlayer(Application* app, bool start_enabled = true);
 	virtual ~ModulePlayer();
 
+	void CameraFollow();
+
 	bool Start();
 	update_status Update(float dt);
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2) override;
@@ -26,4 +28,10 @@ public:
 	float turn;
 	float acceleration;
 	float brake;
+
+	btTransform carPos;
+	vec3 initialCarPos = { 0,0,0 };
+	vec3 carDir = { 0,0,0 };
+	vec3 cameraPos = { 0,0,0 };
+
 };

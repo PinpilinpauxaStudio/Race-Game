@@ -148,9 +148,21 @@ update_status ModulePlayer::Update(float dt)
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
 
+	CameraFollow();
+
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::CameraFollow()
+{
+	carPos = vehicle->vehicle->getChassisWorldTransform();
+	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ() };
+	carDir = { carPos.getBasis().getColumn(2).getX(),carPos.getBasis().getColumn(2).getY(),carPos.getBasis().getColumn(2).getZ() };
+	App->camera->Position = cameraPos;
+	cameraPos = initialCarPos - 10 * carDir;
+	App->camera->Position.y = initialCarPos.y + 5;
+
+}
 
 void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
