@@ -26,7 +26,9 @@ bool ModuleSceneIntro::Start()
 	sensor_cube->SetAsSensor(true);
 	sensor_cube->SetPos(0, 3, 0);*/
 
-	sog.CreateRectangle({ 0,0,0 }, { 0,0,0 }, { 50,1,50 });
+	sog.CreateRectangle({ 0,0,0 }, { 0,0,0 }, { 10,1,50 });
+	sog.CreateRectangle({ 0,-17.5,42.5 }, { 45,0,0 }, { 10,1,50 });
+	sog.CreateRectangle({ 0,-17.5*2,42.5*2 }, { 0,0,0 }, { 10,1,50 });
 
 
 	//Create sensor
@@ -72,9 +74,9 @@ SceneObjectGenerator::SceneObjectGenerator(Application* App)
 void SceneObjectGenerator::CreateRectangle(vec3 position, vec3 rotation, vec3 scale, float mass, bool isSensor)
 {
 	Cube* c = new Cube();
-	c->SetPos(position.x, position.y, position.z);
-	c->SetRotation(rotation.x, rotation.y, rotation.z);
 	c->size = scale;
+	c->SetRotation(rotation.x, rotation.y, rotation.z);
+	c->SetPos(position.x, position.y, position.z);
 	if(!isSensor)ground.add((Primitive*)c);
 	
 	App->physics->AddBody(*c, mass);
