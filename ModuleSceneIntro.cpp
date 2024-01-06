@@ -19,7 +19,7 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
+	//App->camera->LookAt(App->player->initialCarPos);
 
 	// Create sensor cube (will trigger with car)
 	/*sensor_cube = App->physics->AddBody(Cube(5, 5, 5), 0.0);
@@ -48,10 +48,20 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	float* carTransform = new float[14];
+	//Uncomment to allow the camera to follow the car
+	/*float* carTransform = new float[14];
 	App->player->vehicle->GetTransform(carTransform);
 	vec3 carPos = { carTransform[12], carTransform[13], carTransform[14] };
-	App->camera->LookAt(carPos);
+	App->camera->LookAt(carPos);*/
+
+	//camera follow the player
+	/*btTransform carPos = App->player->vehicle->vehicle->getChassisWorldTransform();
+	vec3 initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ() };
+	vec3 carDir = { carPos.getBasis().getColumn(2).getX(),carPos.getBasis().getColumn(2).getY(),carPos.getBasis().getColumn(2).getZ() };
+	vec3 cameraPos = initialCarPos - 10 * carDir;
+	App->camera->Position = cameraPos;
+	App->camera->Reference = initialCarPos;
+	App->camera->Position.y = initialCarPos.y + 5;*/
 
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
@@ -85,14 +95,28 @@ void SceneObjectGenerator::CreateRectangle(vec3 position, vec3 rotation, vec3 sc
 void SceneObjectGenerator::CreateSphere(vec3 position, vec3 rotation, float radius, float mass, bool isSensor)
 {
 	Sphere* s = new Sphere();
-	s->SetPos(position.x, position.y, position.z);
 	s->SetRotation(rotation.x, { 1,0,0 });
 	s->SetRotation(rotation.y, { 0,1,0 });
 	s->SetRotation(rotation.z, { 0,0,1 });
+	s->SetPos(position.x, position.y, position.z);
 	s->radius = radius;
 	if (!isSensor)ground.add((Primitive*)s);
 
 	App->physics->AddBody(*s, mass);
+}
+
+void SceneObjectGenerator::CreateCylinder(vec3 position, vec3 rotation, float radius, float height, float mass, bool isSensor)
+{
+	Cylinder* c = new Cylinder();
+	c->SetRotation(rotation.x, { 1,0,0 });
+	c->SetRotation(rotation.y, { 0,1,0 });
+	c->SetRotation(rotation.z, { 0,0,1 });
+	c->SetPos(position.x, position.y, position.z);
+	c->radius = radius;
+	c->height = height;
+	if (!isSensor)ground.add((Primitive*)c);
+
+	App->physics->AddBody(*c, mass);
 }
 
 void SceneObjectGenerator::RenderObjects()

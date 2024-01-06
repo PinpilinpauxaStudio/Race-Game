@@ -165,19 +165,23 @@ update_status ModulePlayer::Update(float dt)
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
 
-	CameraFollow();
+	CameraFollow(dt);
 
 	return UPDATE_CONTINUE;
 }
 
-void ModulePlayer::CameraFollow()
+void ModulePlayer::CameraFollow(float dt)
 {
 	carPos = vehicle->vehicle->getChassisWorldTransform();
 	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ() };
 	carDir = { carPos.getBasis().getColumn(2).getX(),carPos.getBasis().getColumn(2).getY(),carPos.getBasis().getColumn(2).getZ() };
-	App->camera->Position = cameraPos;
 	cameraPos = initialCarPos - 10 * carDir;
-	App->camera->Position.y = initialCarPos.y + 5;
+	//btVector3 lerpedCamPos = lerp({ oldCameraPos.x, oldCameraPos.y, oldCameraPos.z }, { cameraPos.x, cameraPos.y, cameraPos.z }, dt * 400);
+	//oldCameraPos = { lerpedCamPos.getX(), lerpedCamPos.getY(), lerpedCamPos.getZ()};
+	//App->camera->Position = oldCameraPos;
+	App->camera->Position = cameraPos;
+	App->camera->Reference = initialCarPos;
+	App->camera->Position.y += 5;
 
 }
 

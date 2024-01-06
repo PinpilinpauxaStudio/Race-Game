@@ -15,7 +15,7 @@ public:
 	ModulePlayer(Application* app, bool start_enabled = true);
 	virtual ~ModulePlayer();
 
-	void CameraFollow();
+	void CameraFollow(float dt);
 
 	bool Start();
 	update_status Update(float dt);
@@ -33,5 +33,6 @@ public:
 	vec3 initialCarPos = { 0,0,0 };
 	vec3 carDir = { 0,0,0 };
 	vec3 cameraPos = { 0,0,0 };
+	vec3 oldCameraPos = { 0,0,0 };
 
 };
