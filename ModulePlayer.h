@@ -28,6 +28,9 @@ public:
 	float turn;
 	float acceleration;
 	float brake;
+	//btVector3 g;
+
+	//float val = -10.0f;
 
 	btTransform carPos;
 	vec3 initialCarPos = { 0,0,0 };
