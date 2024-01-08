@@ -117,23 +117,24 @@ update_status ModulePlayer::Update(float dt)
 	acceleration = brake = 0.0f;
 
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		vehicle->info.mass += 100.0f; 
 		LOG("mass: %f", vehicle->info.mass)
+		vehicle->info.mass += 100.0f;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		if(vehicle->info.mass > 100.0f) vehicle->info.mass -= 100.0f;
 		LOG("mass: %f", vehicle->info.mass)
+		if(vehicle->info.mass > 100.0f) vehicle->info.mass -= 100.0f;
 	}
-	/*if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		LOG("gravity: %f", g.getY())
 		val += 5.0f;
 		g.setY(val);
-		LOG("gravity: %f", g.getY())
 	}
 	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		LOG("gravity: %f", g.getY())
 		val -= 5.0f;
 		g.setY(val);
-		LOG("gravity: %f", g.getY())
-	}*/
+	}
+
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
 		acceleration = MAX_ACCELERATION;
