@@ -1,4 +1,4 @@
-#include "Globals.h"
+﻿#include "Globals.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
@@ -35,7 +35,7 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 0,3,0 }, { 0,0,0 }, { 5,5,5 }, 0, true);
 	sog.CreateRectangle({ 0,0,0 }, { 0,0,0 }, { 1000,0,1000 }, 0, true);
 
-	sog.CreateCurve({ 0,0,0 }, { 0,0,0 });
+	sog.CreateCurve({ 0,0,0 }, { 0,45,0 }, 20, 90);
 
 	return ret;
 }
@@ -122,18 +122,16 @@ void SceneObjectGenerator::CreateCylinder(vec3 position, vec3 rotation, float ra
 	App->physics->AddBody(*c, mass);
 }
 
-void SceneObjectGenerator::CreateCurve(vec3 position, vec3 rotation)
+void SceneObjectGenerator::CreateCurve(vec3 position, vec3 rotation, float radius, float targetAngle)
 {
 	float segmentLength = 2.0;
 	float angle = 0;
-	int segmentCount = 20;
-	int targetAngle = 90;
-	int radius = 20;
+	int segmentCount = radius * 2;
 
 	for (int i = 0; i <= segmentCount; i++)
 	{
 		{
-			CreateRectangle({ position.x + i * segmentLength / segmentCount * (float)cos(angle / 2 * 3.1415 / 180) * radius, position.y ,position.z - i * segmentLength / segmentCount * (float)sin(angle / 2 * 3.1415 / 180) * radius}, {0,angle,0}, {segmentLength,1,10});
+			CreateRectangle({ position.x + i * segmentLength / segmentCount * (float)cos((rotation.x + angle) / 2 * 3.1415 / 180) * radius, position.y ,position.z - i * segmentLength / segmentCount * (float)sin((rotation.z + angle) / 2 * 3.1415 / 180) * radius }, { rotation.x,rotation.y + angle,rotation.z }, { segmentLength,1,10 });
 			angle += targetAngle / segmentCount;
 		}
 	}
