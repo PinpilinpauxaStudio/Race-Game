@@ -100,6 +100,9 @@ bool ModulePlayer::Start()
 	vehicle->collision_listeners.add(this); // Add this module as listener to callbacks from vehicle
 	vehicle->SetPos(0, 12, 10);
 
+	carPos = vehicle->vehicle->getChassisWorldTransform();
+	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ() };
+
 	return true;
 }
 
@@ -185,7 +188,10 @@ update_status ModulePlayer::Update(float dt)
 	App->window->SetTitle(title);
 
 	CameraFollow(dt);
-
+	if (carPos.getOrigin().getY() <= -20) {
+		vehicle->SetPos(0, 12, 10);
+		vehicle->vehicle->resetSuspension(); 
+	}
 	return UPDATE_CONTINUE;
 }
 

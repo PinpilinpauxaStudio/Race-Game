@@ -33,7 +33,7 @@ bool ModuleSceneIntro::Start()
 
 	//Create sensor
 	sog.CreateRectangle({ 0,3,0 }, { 0,0,0 }, { 5,5,5 }, 0, true);
-	sog.CreateRectangle({ 0,0,0 }, { 0,0,0 }, { 1000,0,1000 }, 0, true);
+	//lose = sog.CreateRectangle({ 0,-10,0 }, { 0,0,0 }, { 1000,0,1000 }, 0, true);
 
 	return ret;
 }
@@ -67,7 +67,6 @@ update_status ModuleSceneIntro::Update(float dt)
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-
 	sog.RenderObjects();
 
 	return UPDATE_CONTINUE;
