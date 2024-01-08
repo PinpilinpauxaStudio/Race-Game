@@ -34,6 +34,8 @@ bool ModuleSceneIntro::Start()
 	//Create sensor
 	sog.CreateRectangle({ 0,3,0 }, { 0,0,0 }, { 5,5,5 }, 0, true);
 
+	sog.CreateCurve({ 0,0,0 }, { 0,0,0 });
+
 	return ret;
 }
 
@@ -117,6 +119,23 @@ void SceneObjectGenerator::CreateCylinder(vec3 position, vec3 rotation, float ra
 	if (!isSensor)ground.add((Primitive*)c);
 
 	App->physics->AddBody(*c, mass);
+}
+
+void SceneObjectGenerator::CreateCurve(vec3 position, vec3 rotation)
+{
+	float segmentLength = 2.0;
+	float angle = 0;
+	int segmentCount = 20;
+	int targetAngle = 90;
+	int radius = 20;
+
+	for (int i = 0; i <= segmentCount; i++)
+	{
+		{
+			CreateRectangle({ position.x + i * segmentLength / segmentCount * (float)cos(angle / 2 * 3.1415 / 180) * radius, position.y ,position.z - i * segmentLength / segmentCount * (float)sin(angle / 2 * 3.1415 / 180) * radius}, {0,angle,0}, {segmentLength,1,10});
+			angle += targetAngle / segmentCount;
+		}
+	}
 }
 
 void SceneObjectGenerator::RenderObjects()
