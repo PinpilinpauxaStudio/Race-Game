@@ -146,19 +146,19 @@ update_status ModulePlayer::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES / 100;
+			turn +=  TURN_DEGREES * dt * 5;
 	}
 	else {
 		if (turn > 0)
 		{
-			turn -= TURN_DEGREES / 100;
+			turn -= TURN_DEGREES * dt * 5;
 		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES / 100;
+			turn -= TURN_DEGREES * dt * 5;
 	}
 	else {
 		if (turn < 0)
