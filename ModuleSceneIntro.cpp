@@ -34,7 +34,7 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 0,3,0 }, { 0,0,0 }, { 5,5,5 }, 0, true);
 	//lose = sog.CreateRectangle({ 0,-10,0 }, { 0,0,0 }, { 1000,0,1000 }, 0, true);
 
-	sog.CreateCurve({ 0,0,0 }, { 0,45,0 }, 20, 90);
+	sog.CreateCurve({ 0,0,0 }, { 0,0,0 }, 20, 90);
 
 	return ret;
 }
