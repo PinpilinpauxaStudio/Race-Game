@@ -150,7 +150,7 @@ update_status ModulePlayer::Update(float dt)
 			accelerationSoundPlayed = true;
 		}
 	}
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_UP) accelerationSoundPlayed = false;
+	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_UP) accelerationSoundPlayed = false;
 
 	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
