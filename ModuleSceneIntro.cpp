@@ -66,12 +66,6 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 4.64, 18.75, -141.48 }, { -0.01, -0.03, 2.53 }, { 15.81, 26.92, 0.94 });
 
 
-
-
-
-
-
-
 	//Create sensor
 	//sog.CreateRectangle({ 0,3,0 }, { 0,0,0 }, { 5,5,5 }, 0, true);
 	//lose = sog.CreateRectangle({ 0,-10,0 }, { 0,0,0 }, { 1000,0,1000 }, 0, true);

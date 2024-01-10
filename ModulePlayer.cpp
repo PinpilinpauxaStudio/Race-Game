@@ -102,7 +102,7 @@ bool ModulePlayer::Start()
 	vehicle->SetPos(0, 12, 10);
 
 	carPos = vehicle->vehicle->getChassisWorldTransform();
-	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ() };
+	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ()};
 
 	return true;
 }
@@ -139,12 +139,12 @@ update_status ModulePlayer::Update(float dt)
 		g.setY(val);
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		acceleration = MAX_ACCELERATION;
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
 			turn +=  TURN_DEGREES * dt * 5;
@@ -156,7 +156,7 @@ update_status ModulePlayer::Update(float dt)
 		}
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		if(turn > -TURN_DEGREES)
 			turn -= TURN_DEGREES * dt * 5;
@@ -168,7 +168,7 @@ update_status ModulePlayer::Update(float dt)
 		}
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		acceleration = -MAX_ACCELERATION;
 	}
@@ -199,7 +199,7 @@ update_status ModulePlayer::Update(float dt)
 void ModulePlayer::CameraFollow(float dt)
 {
 	carPos = vehicle->vehicle->getChassisWorldTransform();
-	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ() };
+	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ()};
 	carDir = { carPos.getBasis().getColumn(2).getX(),carPos.getBasis().getColumn(2).getY(),carPos.getBasis().getColumn(2).getZ() };
 	cameraPos = initialCarPos - 10 * carDir;
 	//btVector3 lerpedCamPos = lerp({ oldCameraPos.x, oldCameraPos.y, oldCameraPos.z }, { cameraPos.x, cameraPos.y, cameraPos.z }, dt * 400);
