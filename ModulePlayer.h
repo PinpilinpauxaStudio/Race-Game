@@ -32,6 +32,11 @@ public:
 
 	float val = -10.0f;
 
+	int accelerationFx, brakeFx; 
+
+	bool brakeSoundPlayed = false; 
+	bool accelerationSoundPlayed = false; 
+
 	btTransform carPos;
 	vec3 initialCarPos = { 0,0,0 };
 	vec3 carDir = { 0,0,0 };

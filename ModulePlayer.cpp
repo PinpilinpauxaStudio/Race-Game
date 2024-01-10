@@ -103,6 +103,9 @@ bool ModulePlayer::Start()
 
 	carPos = vehicle->vehicle->getChassisWorldTransform();
 	initialCarPos = { carPos.getOrigin().getX(),carPos.getOrigin().getY(),carPos.getOrigin().getZ() };
+	
+	accelerationFx = App->audio->LoadFx("Audio/acceleration.ogg");
+	brakeFx = App->audio->LoadFx("Audio/brake.ogg");
 
 	return true;
 }
@@ -142,7 +145,12 @@ update_status ModulePlayer::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
 		acceleration = MAX_ACCELERATION;
+		if (!accelerationSoundPlayed) {
+			App->audio->PlayFx(accelerationFx);
+			accelerationSoundPlayed = true;
+		}
 	}
+	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_UP) accelerationSoundPlayed = false;
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
@@ -176,7 +184,13 @@ update_status ModulePlayer::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
 		brake = BRAKE_POWER;
+		if (!brakeSoundPlayed) {
+			App->audio->PlayFx(brakeFx);
+			brakeSoundPlayed = true; 
+		}
 	}
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) brakeSoundPlayed = false;
+
 
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
