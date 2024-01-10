@@ -18,6 +18,7 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
+	App->audio->PlayMusic("Audio/dubiduba.ogg");
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	//App->camera->LookAt(App->player->initialCarPos);
 

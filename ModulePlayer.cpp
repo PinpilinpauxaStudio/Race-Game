@@ -191,7 +191,7 @@ update_status ModulePlayer::Update(float dt)
 	CameraFollow(dt);
 	if (carPos.getOrigin().getY() <= -20) {
 		vehicle->SetPos(0, 12, 10);
-		vehicle->vehicle->resetSuspension(); 
+;		acceleration = brake = 0.0f;
 	}
 	return UPDATE_CONTINUE;
 }
