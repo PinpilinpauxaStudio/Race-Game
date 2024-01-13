@@ -59,4 +59,7 @@ public:
 	SceneObjectGenerator sog = SceneObjectGenerator(App);
 
 	PhysBody3D* lose;
+	p2List<PhysBody3D*> checkpoints;
+	mat4x4 spawnPoint;
+
 };

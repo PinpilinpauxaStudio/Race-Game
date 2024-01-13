@@ -203,10 +203,10 @@ update_status ModulePlayer::Update(float dt)
 	App->window->SetTitle(title);
 
 	CameraFollow(dt);
-	if (carPos.getOrigin().getY() <= -20) {
+	/*if (carPos.getOrigin().getY() <= -20) {
 		vehicle->SetPos(0, 12, 10);
 ;		acceleration = brake = 0.0f;
-	}
+	}*/
 	return UPDATE_CONTINUE;
 }
 

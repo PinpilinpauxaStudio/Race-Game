@@ -65,10 +65,21 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 94.46, 18.75, -139.48 }, { 0.03, -0.00, 0.81 }, { 13.95, 23.77, 0.83 });
 	sog.CreateRectangle({ 4.64, 18.75, -141.48 }, { -0.01, -0.03, 2.53 }, { 15.81, 26.92, 0.94 });
 
+	checkpoints.add(sog.CreateRectangle({ 0,0,0 }, { 0,0,0 }, { 20,20,20 }, 0, true));
+	checkpoints.add(sog.CreateRectangle({ 0,0,40 }, { 0,0,0 }, { 20,20,20 }, 0, true));
+	checkpoints.add(sog.CreateRectangle({ -20,0,100 }, { 0,0,0 }, { 20,20,20 }, 0, true));
 
 	//Create sensor
-	//sog.CreateRectangle({ 0,3,0 }, { 0,0,0 }, { 5,5,5 }, 0, true);
-	//lose = sog.CreateRectangle({ 0,-10,0 }, { 0,0,0 }, { 1000,0,1000 }, 0, true);
+	p2List_item<PhysBody3D*>* a = checkpoints.getFirst();
+
+	while (a != NULL)
+	{
+		a->data->collision_listeners.add((this));
+		a = a->next;
+	}
+
+	lose = sog.CreateRectangle({ 0,-20,0 }, { 0,0,0 }, { 1000,1000,10 }, 0, true);
+	lose->collision_listeners.add(this);
 
 	//sog.CreateCurve({ 0,0,0 }, { 0,0,0 }, 20, 90);
 
@@ -111,6 +122,16 @@ update_status ModuleSceneIntro::Update(float dt)
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
+	if (body2 == App->player->vehicle)
+	{
+		if (body1 != lose)
+		{
+			body1->GetTransform(&spawnPoint);
+		}
+		else {
+			App->player->vehicle->SetTransform(&spawnPoint);
+		}
+	}
 }
 
 SceneObjectGenerator::SceneObjectGenerator(Application* App)
