@@ -123,23 +123,32 @@ update_status ModulePlayer::Update(float dt)
 {
 	acceleration = brake = 0.0f;
 
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 		LOG("mass: %f", vehicle->info.mass)
 		vehicle->info.mass += 100.0f;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 		LOG("mass: %f", vehicle->info.mass)
 		if(vehicle->info.mass > 100.0f) vehicle->info.mass -= 100.0f;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 		LOG("gravity: %f", g.getY())
 		val += 5.0f;
 		g.setY(val);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 		LOG("gravity: %f", g.getY())
 		val -= 5.0f;
 		g.setY(val);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		LOG("friction: %f", vehicle->info.frictionSlip)
+		vehicle->info.frictionSlip += 10.0f; 
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+		LOG("friction: %f", vehicle->info.frictionSlip)
+		vehicle->info.frictionSlip -= 10.0f;
+		if (vehicle->info.frictionSlip <= 0) vehicle->info.frictionSlip = 0;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
