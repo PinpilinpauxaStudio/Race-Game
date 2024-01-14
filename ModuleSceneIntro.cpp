@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 #include "PhysVehicle3D.h"
+#include "Color.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -31,7 +32,8 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 0,-17.5,42.5 }, { 45,0,0 }, { 10,1,50 });
 	sog.CreateRectangle({ 0,-17.5*2,42.5*2 }, { 0,0,0 }, { 10,1,50 });*/
 
-	//sog.CreateRectangle({ 46.42, 6.06, 16.11 }, { -0.04, -0.05, -0.12 }, { 76.63, 48.58, 56.44 });
+
+	/*sog.CreateRectangle({ 46.42, 6.06, 16.11 }, { -0.04, -0.05, -0.12 }, { 76.63, 48.58, 56.44 });*/
 	sog.CreateRectangle({ 46.42, 6.06, 16.11 }, { -0.04, -0.05, -0.12 }, { 0.93, 7.51, 0.31 });
 	sog.CreateRectangle({ 59.17, -9.58, 66.34 }, { 3.14, -0.00, 0.00 }, { 18.14, 24.87, -0.67 });
 	sog.CreateRectangle({ 2.45, -9.31, 26.67 }, { 0.00, 0.00, 0.00 }, { 18.14, 88.75, 0.67 });
@@ -62,9 +64,14 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 63.64, 1.93, -31.99 }, { 0.32, -0.43, -1.65 }, { 13.27, 35.77, 0.48 });
 
 	//Checkpoints Spawning
-	checkpoints.add(sog.CreateRectangle({ 0,0,0 }, { 0,0,0 }, { 20,20,20 }, 0, true));
-	checkpoints.add(sog.CreateRectangle({ 0,0,40 }, { 0,0,0 }, { 20,20,20 }, 0, true));
-	checkpoints.add(sog.CreateRectangle({ -20,0,100 }, { 0,0,0 }, { 20,20,20 }, 0, true));
+	checkpoints.add(sog.CreateRectangle({ 2,-6,20 }, { 0,0,0 }, { 15,5,5 }, Orange, 0, true));
+	checkpoints.add(sog.CreateRectangle({ -37,-4,50 }, { 0,0,0 }, { 15,5,5 },Orange, 0, true));
+
+
+
+	/*checkpoints.add(sog.CreateRectangle({ 0,0,40 }, { 0,0,0 }, { 20,20,20 }, 0, true));*/
+	//checkpoints.add(sog.CreateRectangle({ -20,0,100 }, { 0,0,0 }, { 20,20,20 }, 0, true));
+	//checkpoints.add(sog.CreateRectangle({ -50,0,90 }, { 0,0,0 }, { 20,20,20 }, 0, true));
 
 	p2List_item<PhysBody3D*>* a = checkpoints.getFirst();
 
@@ -74,7 +81,7 @@ bool ModuleSceneIntro::Start()
 		a = a->next;
 	}
 
-	lose = sog.CreateRectangle({ 0,-20,0 }, { 0,0,0 }, { 1000,1000,10 }, 0, true);
+	lose = sog.CreateRectangle({ 0,-20,0 }, { 0,0,0 }, { 1000,1000,10 },White, 0, true);
 	lose->collision_listeners.add(this);
 
 	//sog.CreateCurve({ 0,0,0 }, { 0,0,0 }, 20, 90);
@@ -135,9 +142,10 @@ SceneObjectGenerator::SceneObjectGenerator(Application* App)
 	this->App = App;
 }
 
-PhysBody3D* SceneObjectGenerator::CreateRectangle(vec3 position, vec3 rotation, vec3 scale, float mass, bool isSensor)
+PhysBody3D* SceneObjectGenerator::CreateRectangle(vec3 position, vec3 rotation, vec3 scale, const Color color, float mass, bool isSensor)
 {
 	Cube* c = new Cube();
+	c->color = color;
 	c->size = scale;
 	c->SetRotation((rotation.x + 1.57079633) * 180 / M_PI, rotation.y * 180 / M_PI, rotation.z * 180 / M_PI);
 	c->SetPos(position.x, position.y, position.z);

@@ -33,3 +33,4 @@ extern Color White;
 extern Color Perry;
 extern Color Orange;
 extern Color Brown;
+extern Color Asphalt;

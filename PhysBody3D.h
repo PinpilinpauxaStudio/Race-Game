@@ -2,9 +2,11 @@
 #define __PhysBody3D_H__
 
 #include "p2List.h"
+#include "Color.h"
 
 class btRigidBody;
 class Module;
+class Color;
 
 // =================================================
 struct PhysBody3D

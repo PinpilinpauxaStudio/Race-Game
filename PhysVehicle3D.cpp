@@ -27,8 +27,6 @@ void PhysVehicle3D::Render()
 
 	wheel.color = Perry;
 
-	
-
 	for(int i = 0; i < vehicle->getNumWheels(); ++i)
 	{
 		wheel.radius = info.wheels[0].radius;
