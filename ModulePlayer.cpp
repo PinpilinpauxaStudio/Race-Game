@@ -109,6 +109,9 @@ bool ModulePlayer::Start()
 
 	vehicle->GetTransform(&App->scene_intro->spawnPoint);
 
+	initmass = 500.0f;
+	initgrav = -10.0f;
+	initfric = 50.5f;
 	return true;
 }
 
@@ -125,11 +128,11 @@ update_status ModulePlayer::Update(float dt)
 {
 	acceleration = brake = 0.0f;
 
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
 		LOG("mass: %f", vehicle->info.mass)
 		vehicle->info.mass += 100.0f;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
 		LOG("mass: %f", vehicle->info.mass)
 		if(vehicle->info.mass > 100.0f) vehicle->info.mass -= 100.0f;
 	}
@@ -143,11 +146,11 @@ update_status ModulePlayer::Update(float dt)
 		val -= 5.0f;
 		g.setY(val);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
 		LOG("friction: %f", vehicle->info.frictionSlip)
 		vehicle->info.frictionSlip += 10.0f; 
 	}
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
 		LOG("friction: %f", vehicle->info.frictionSlip)
 		vehicle->info.frictionSlip -= 10.0f;
 		if (vehicle->info.frictionSlip <= 0) vehicle->info.frictionSlip = 0;

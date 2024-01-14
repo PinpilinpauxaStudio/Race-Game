@@ -127,6 +127,9 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		}
 		else {
 			App->player->vehicle->SetTransform(&spawnPoint);
+			App->player->vehicle->info.mass = App->player->initmass;
+			App->player->val = App->player->initgrav;
+			App->player->vehicle->info.frictionSlip = App->player->initfric;
 		}
 	}
 }
