@@ -16,9 +16,9 @@ class SceneObjectGenerator
 	Application* App;
 public:
 	SceneObjectGenerator(Application* App);
-	PhysBody3D* CreateRectangle(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, vec3 scale = { 1,1,1 }, const Color color = Asphalt, float mass = 0, bool isSensor = false);
+	PhysBody3D* CreateRectangle(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, vec3 scale = { 1,1,1 }, const Color color = Green, float mass = 0, bool isSensor = false);
 	void CreateSphere(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, float radius = 1.0f, float mass = 0, bool isSensor = false);
-	PhysBody3D* CreateCylinder(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, const Color color = Red, float radius = 1.0f, float height = 2.0f, float mass = 0, bool isSensor = false);
+	void CreateCylinder(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, float radius = 1.0f, float height = 2.0f, float mass = 0, bool isSensor = false);
 	void CreateCurve(vec3 position = { 0,0,0 }, vec3 rotation = { 0,0,0 }, float radius = 20, float targetAngle = 90);
 	void RenderObjects();
 
