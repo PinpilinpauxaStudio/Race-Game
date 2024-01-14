@@ -59,10 +59,10 @@ bool ModuleSceneIntro::Start()
 
 	
 	//OBSTACULOS---------------
-	sog.CreateRectangle({ -50.00, 5.00 + 10, -140.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 });
-	sog.CreateRectangle({ -60.00, 5.00 + 10, -130.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 });
-	sog.CreateRectangle({ -70.00, 5.00 + 10, -130.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 });
-	sog.CreateRectangle({ -40.00, 5.00 + 10, -135.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 });
+	sog.CreateRectangle({ -50.00, 5.00 + 10, -140.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 }, Red);
+	sog.CreateRectangle({ -60.00, 5.00 + 10, -130.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 }, Red);
+	sog.CreateRectangle({ -70.00, 5.00 + 10, -130.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 }, Red);
+	sog.CreateRectangle({ -40.00, 5.00 + 10, -135.00 }, { 0.00, 0.00, 0.00 }, { 5.00, 5.00, 2.00 }, Red);
 
 	
 	///*sog.CreateRectangle({ 46.42, 6.06, 16.11 }, { -0.04, -0.05, -0.12 }, { 76.63, 48.58, 56.44 });*/
@@ -96,8 +96,8 @@ bool ModuleSceneIntro::Start()
 	//sog.CreateRectangle({ 63.64, 1.93, -31.99 }, { 0.32, -0.43, -1.65 }, { 13.27, 35.77, 0.48 });
 
 	//Checkpoints Spawning
-	checkpoints.add(sog.CreateRectangle({ 2,-6,20 }, { 0,0,0 }, { 15,5,5 }, Orange, 0, true));
-	checkpoints.add(sog.CreateRectangle({ -37,-4,50 }, { 0,0,0 }, { 15,5,5 },Orange, 0, true));
+	checkpoints.add(sog.CreateCylinder({ 2,2,20 }, { 0,45,0 }, Blue, 10.0f, 1.0f, 0, true));
+	checkpoints.add(sog.CreateCylinder({ -37,-4,50 }, { 0,0,0 }, Blue, 2.0f, 1.0f, 0, true));
 
 
 
@@ -203,18 +203,19 @@ void SceneObjectGenerator::CreateSphere(vec3 position, vec3 rotation, float radi
 	App->physics->AddBody(*s, mass);
 }
 
-void SceneObjectGenerator::CreateCylinder(vec3 position, vec3 rotation, float radius, float height, float mass, bool isSensor)
+PhysBody3D* SceneObjectGenerator::CreateCylinder(vec3 position, vec3 rotation, const Color color, float radius, float height, float mass, bool isSensor)
 {
-	Cylinder* c = new Cylinder();
-	c->SetRotation(rotation.x, { 1,0,0 });
-	c->SetRotation(rotation.y, { 0,1,0 });
-	c->SetRotation(rotation.z, { 0,0,1 });
-	c->SetPos(position.x, position.y, position.z);
-	c->radius = radius;
-	c->height = height;
-	if (!isSensor)ground.add((Primitive*)c);
+	Cylinder* cy = new Cylinder();
+	cy->SetRotation(rotation.x, { 1,0,0 });
+	cy->SetRotation(rotation.y, { 0,1,0 });
+	cy->SetRotation(rotation.z, { 0,0,1 });
+	cy->SetPos(position.x, position.y, position.z);
+	cy->color = color;
+	cy->radius = radius;
+	cy->height = height;
+	if (!isSensor)ground.add((Primitive*)cy);
 
-	App->physics->AddBody(*c, mass);
+	return App->physics->AddBody(*cy, mass);
 }
 
 void SceneObjectGenerator::CreateCurve(vec3 position, vec3 rotation, float radius, float targetAngle)
