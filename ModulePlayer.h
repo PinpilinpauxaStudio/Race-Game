@@ -31,6 +31,9 @@ public:
 	btVector3 g = {0,-10,0};
 
 	float val = -10.0f;
+	float initmass;
+	float initgrav;
+	float initfric;
 
 	int accelerationFx, brakeFx; 
 

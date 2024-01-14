@@ -115,6 +115,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	App->camera->Reference = initialCarPos;
 	App->camera->Position.y = initialCarPos.y + 5;*/
 
+
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
@@ -133,6 +134,9 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		}
 		else {
 			App->player->vehicle->SetTransform(&spawnPoint);
+			App->player->vehicle->info.mass = App->player->initmass;
+			App->player->val = App->player->initgrav;
+			App->player->vehicle->info.frictionSlip = App->player->initfric;
 		}
 	}
 }
