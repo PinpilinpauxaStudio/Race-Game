@@ -40,11 +40,11 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ -51.43, -4.59, 37.61 }, { 0.05, -3.03, 1.46 }, { 12.47, 19.54, 0.67 });
 	sog.CreateRectangle({ 112.53, 8.29, -30.07 }, { -0.01, -3.11, -0.02 }, { 18.14, 70.57, 0.67 });
 	sog.CreateRectangle({ 78.07, 7.09, -91.62 }, { -0.03, -3.12, -0.02 }, { 18.14, 26.99, 0.67 });
-	sog.CreateRectangle({ 41.85, 9.42, -111.99 }, { 3.04, -0.02, 1.55 }, { 11.71, 65.89, 0.67 });
+	sog.CreateRectangle({ 39.90, 7.18, -116.23 }, { 0.00, -0.00, -1.60 }, { 11.71, 70.35, 0.67 });
 	sog.CreateRectangle({ 2.58, 14.56, -93.53 }, { -0.29, 3.08, -0.02 }, { 17.69, 27.00, 0.67 });
 	sog.CreateRectangle({ 2.85, 25.97, -62.21 }, { -0.39, 3.08, -0.03 }, { 17.70, 42.18, 0.67 });
 	sog.CreateRectangle({ 95.16, 7.71, -71.77 }, { -3.12, -0.03, 1.55 }, { 11.27, 19.19, 0.67 });
-	sog.CreateRectangle({ 82.74, 10.06, 6.86 }, { -2.95, 0.22, 1.43 }, { 11.98, 71.38, 0.67 });
+	sog.CreateRectangle({ 82.79, 7.31, 6.87 }, { 0.04, -0.00, 1.52 }, { 11.98, 71.38, 0.67 });
 	sog.CreateRectangle({ 75.04, -1.49, -7.92 }, { -3.07, 0.08, 0.01 }, { 16.30, 39.00, 0.67 });
 	sog.CreateRectangle({ 55.40, 6.47, -13.59 }, { -3.08, -0.33, 0.03 }, { 14.03, 28.39, 0.67 });
 	sog.CreateRectangle({ -29.65, -8.14, 76.14 }, { 0.04, 3.03, 0.56 }, { 18.13, 25.57, 0.67 });
@@ -58,20 +58,14 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 111.46, 7.70, -70.09 }, { 0.02, -0.03, 0.81 }, { 11.27, 19.19, 0.67 });
 	sog.CreateRectangle({ 80.18, 7.52, -75.70 }, { 0.03, -0.00, 0.81 }, { 11.27, 19.19, 0.67 });
 	sog.CreateRectangle({ 77.40, 7.52, -109.20 }, { 0.03, -0.00, 0.81 }, { 11.27, 19.19, 0.67 });
-	sog.CreateRectangle({ 4.87, 7.52, -110.81 }, { -0.01, -0.03, 2.53 }, { 12.76, 21.74, 0.76 });
+	sog.CreateRectangle({ 4.17, 9.37, -111.10 }, { -0.24, 3.12, -0.51 }, { 12.76, 21.74, 0.76 });
 	sog.CreateRectangle({ 63.64, 1.93, -31.99 }, { 0.32, -0.43, -1.65 }, { 13.27, 35.77, 0.48 });
 
-
-
-
-
-
-
+	//Checkpoints Spawning
 	checkpoints.add(sog.CreateRectangle({ 0,0,0 }, { 0,0,0 }, { 20,20,20 }, 0, true));
 	checkpoints.add(sog.CreateRectangle({ 0,0,40 }, { 0,0,0 }, { 20,20,20 }, 0, true));
 	checkpoints.add(sog.CreateRectangle({ -20,0,100 }, { 0,0,0 }, { 20,20,20 }, 0, true));
 
-	//Create sensor
 	p2List_item<PhysBody3D*>* a = checkpoints.getFirst();
 
 	while (a != NULL)
