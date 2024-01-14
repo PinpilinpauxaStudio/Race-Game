@@ -222,6 +222,7 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->SetPos(0, 12, 10);
 ;		acceleration = brake = 0.0f;
 	}*/
+
 	return UPDATE_CONTINUE;
 }
 
