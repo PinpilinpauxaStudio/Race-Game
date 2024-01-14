@@ -32,7 +32,9 @@ bool ModuleSceneIntro::Start()
 	sog.CreateRectangle({ 0,-17.5,42.5 }, { 45,0,0 }, { 10,1,50 });
 	sog.CreateRectangle({ 0,-17.5*2,42.5*2 }, { 0,0,0 }, { 10,1,50 });*/
 
-	sog.CreateRectangle({ 0.00, -5.00 + 10, 0.00 }, { 0.00, 0.00, 0.00 }, { 20.00, 80.00, 0.50 });
+	sog.CreateRectangle({ 0.00, -5.00 + 10, 0.00 }, { 0.00, 0.00, 0.00 }, { 30.00, 80.00, 0.50 });
+	sog.CreateRectangle({ -15.00, 10, 0.00 }, { 0.00, 0.00, 0.00 }, { 10.00, 40.00, 10.50 }, Red);
+	sog.CreateRectangle({ 15.00, 10, 0.00 }, { 0.00, 0.00, 0.00 }, { 10.00, 40.00, 10.50 }, Red);
 	sog.CreateRectangle({ -20.00, -5.00 + 10, 50.00 }, { 0.00, 0.00, 0.00 }, { 60.00, 20.00, 0.50 });
 	sog.CreateRectangle({ -40.00, -3.50 + 10, 25.00 }, { 0.10, 0.00, 0.00 }, { 20.00, 30.00, 0.50 });
 	sog.CreateRectangle({ -40.00, -2.00 + 10, -15.00 }, { 0.00, 0.00, 0.00 }, { 20.00, 50.00, 0.50 });
@@ -117,6 +119,9 @@ bool ModuleSceneIntro::Start()
 		a->data->collision_listeners.add((this));
 		a = a->next;
 	}
+	//WIN--------------------
+	win = sog.CreateRectangle({ -10.00, 18.0, -135.00 }, { 0.00, 0.00, 0.00 }, { 10.00, 20.0, 10.0 }, Red, true);
+	win->collision_listeners.add(this);
 
 	lose = sog.CreateRectangle({ 0,-15,0 }, { 0,0,0 }, { 1000,1000,10 },White, 0, true);
 	lose->collision_listeners.add(this);
@@ -151,7 +156,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	App->camera->Position = cameraPos;
 	App->camera->Reference = initialCarPos;
 	App->camera->Position.y = initialCarPos.y + 5;*/
-
+	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) App->player->vehicle->SetPos(-110.00, 1.50 + 10, -135.00);
 
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
@@ -165,16 +170,16 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	if (body2 == App->player->vehicle)
 	{
-		if (body1 != lose)
-		{
-			body1->GetTransform(&spawnPoint);
-		}
-		else {
+   		if (body1 == lose) {
 			App->player->vehicle->SetTransform(&spawnPoint);
-			App->player->vehicle->info.mass = App->player->initmass;
+			/*App->player->vehicle->info.mass = App->player->initmass;
 			App->player->val = App->player->initgrav;
-			App->player->vehicle->info.frictionSlip = App->player->initfric;
+			App->player->vehicle->info.frictionSlip = App->player->initfric;*/
 		}
+		else if (body1 == win) {
+			App->player->vehicle->SetPos(0, 12, 10);
+		}
+		else body1->GetTransform(&spawnPoint);
 	}
 }
 
