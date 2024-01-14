@@ -108,6 +108,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	App->camera->Reference = initialCarPos;
 	App->camera->Position.y = initialCarPos.y + 5;*/
 
+
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();

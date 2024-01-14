@@ -107,6 +107,8 @@ bool ModulePlayer::Start()
 	accelerationFx = App->audio->LoadFx("Audio/acceleration.ogg");
 	brakeFx = App->audio->LoadFx("Audio/brake.ogg");
 
+	vehicle->GetTransform(&App->scene_intro->spawnPoint);
+
 	return true;
 }
 
@@ -200,6 +202,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) brakeSoundPlayed = false;
 
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_UP) this->vehicle->SetTransform(&App->scene_intro->spawnPoint);
 
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
